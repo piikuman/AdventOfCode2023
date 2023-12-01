@@ -1,30 +1,13 @@
-import re
-
-with open("input.txt") as f:
-    data = f.read().strip()
-
-
-def calibration(data):
-    ls = data.split("\n")
-    # first we find all the numbers in the string
-    ns = [re.findall("\d", x) for x in ls]
-    # then sum the first and the last number of each string (each line)
-    return sum(int(n[0] + n[-1]) for n in ns)
+file = open('input.txt', 'r')
 
 
 # Part 1
-print(calibration(data))
-
-# Part 2
-data = (
-    data.replace("one", "one1one")
-    .replace("two", "two2two")
-    .replace("three", "three3three")
-    .replace("four", "four4four")
-    .replace("five", "five5five")
-    .replace("six", "six6six")
-    .replace("seven", "seven7seven")
-    .replace("eight", "eight8eight")
-    .replace("nine", "nine9nine")
-)
-print(calibration(data))
+sum = 0
+for line in file:
+    line = line.strip()
+    digits = []
+    for char in line:
+        if char.isdigit():
+            digits.append(char)
+    sum += int(digits[0] + digits[-1])
+print("Part 1 sol: ", sum)
